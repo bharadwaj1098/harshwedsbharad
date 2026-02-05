@@ -1,8 +1,14 @@
 // ===== Countdown Timer =====
 function updateCountdown() {
     const weddingDate = new Date('March 6, 2026 10:30:00').getTime();
+    const rsvpDeadline = new Date('March 4, 2026 23:59:59').getTime();
     const now = new Date().getTime();
     const distance = weddingDate - now;
+
+    // Check if RSVP should be closed
+    if (now > rsvpDeadline) {
+        closeRSVP();
+    }
 
     if (distance < 0) {
         document.getElementById('countdown').innerHTML = '<p style="color: var(--color-gold-light); font-size: 1.5rem;">The wedding day is here!</p>';
@@ -18,6 +24,27 @@ function updateCountdown() {
     document.getElementById('hours').textContent = String(hours).padStart(2, '0');
     document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
     document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+}
+
+// ===== Close RSVP when timer ends =====
+function closeRSVP() {
+    const rsvpForm = document.getElementById('rsvpForm');
+    const rsvpSuccess = document.getElementById('rsvpSuccess');
+    const rsvpSection = document.getElementById('rsvp');
+
+    if (rsvpForm) {
+        rsvpForm.classList.add('hidden');
+    }
+
+    if (rsvpSuccess) {
+        rsvpSuccess.innerHTML = `
+            <div class="success-icon" style="background: var(--color-maroon);">!</div>
+            <h3>RSVP Closed</h3>
+            <p>Thank you for your interest. RSVPs are no longer being accepted as the wedding date has arrived.</p>
+            <p style="margin-top: 15px;">If you have any questions, please <a href="mailto:saiarrabelly@gmail.com" style="color: var(--color-gold);">contact us</a>.</p>
+        `;
+        rsvpSuccess.classList.add('show');
+    }
 }
 
 // Update countdown every second
