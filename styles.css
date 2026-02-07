@@ -406,6 +406,14 @@ h1, h2, h3, h4 {
     letter-spacing: 2px;
 }
 
+.couple-parents {
+    font-size: 0.85rem;
+    color: var(--color-gray);
+    margin-top: 10px;
+    font-style: italic;
+    line-height: 1.4;
+}
+
 .couple-middle {
     display: flex;
     align-items: center;
@@ -763,8 +771,11 @@ h1, h2, h3, h4 {
 
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 20px;
+    justify-content: center;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
 .gallery-item {
